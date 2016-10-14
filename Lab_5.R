@@ -6,7 +6,7 @@ library(RColorBrewer)
 library(ggmap)
 library(maptools)
 library(gtools)
-
+#change
 
 mapdata <- read_csv('sata/map.csv')
 
