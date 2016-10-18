@@ -38,14 +38,14 @@ print(map2)
 dev.off()
 #create population variables for color coding
 cuts <- quantcut(ds$Number,q=seq(0,1,.2))
-dscats <- ds %>% mutate(Population=factor(ifelse(Number<100,01,
-                                          ifelse(Number<500,02,
-                                          ifelse(Number<1000,03,
-                                          ifelse(Number<10000,04,05))))))
+dscats <- ds %>% mutate(Population=ifelse(Number<100,1,
+                                        ifelse(Number<500,2,
+                                        ifelse(Number<1000,3,
+                                        ifelse(Number<10000,4,5)))))
+dscats$Population <- factor(dscats$Population, labels=c('1-99','100-499','500-999','1,000-9,999','10,000+'))
 #I struggled with this line a whole lot, for some reason the population 
 #factory variable is not lining up with the number values for population above
 #i swear ive tried everything, nothing seems to work. It makes my data all incorrect
-levels(dscats$Population) <- c('1-99','100-499','500-999','1,000-9,999','10,000+')
 
 #add variable to map
 dsmap <- left_join(dscats,newmap,by=c('STATEFIP'='STATEI')) %>% arrange(order)
